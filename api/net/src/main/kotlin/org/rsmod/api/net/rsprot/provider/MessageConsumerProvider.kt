@@ -27,6 +27,8 @@ import net.rsprot.protocol.game.incoming.misc.user.CloseModal
 import net.rsprot.protocol.game.incoming.misc.user.MoveGameClick
 import net.rsprot.protocol.game.incoming.misc.user.MoveMinimapClick
 import net.rsprot.protocol.game.incoming.misc.user.SetChatFilterSettings
+import net.rsprot.protocol.game.incoming.misc.user.SetHeading
+import net.rsprot.protocol.game.incoming.npcs.OpNpcV2
 import net.rsprot.protocol.game.incoming.npcs.OpNpc6
 import net.rsprot.protocol.game.incoming.npcs.OpNpcT
 import net.rsprot.protocol.game.incoming.npcs.OpNpcV2
@@ -83,6 +85,7 @@ import org.rsmod.api.net.rsprot.handlers.ResumePObjDialogHandler
 import org.rsmod.api.net.rsprot.handlers.ResumePStringDialogHandler
 import org.rsmod.api.net.rsprot.handlers.ResumePauseButtonHandler
 import org.rsmod.api.net.rsprot.handlers.SetChatFilterSettingsHandler
+import org.rsmod.api.net.rsprot.handlers.SetHeadingHandler
 import org.rsmod.api.net.rsprot.handlers.WindowStatusHandler
 import org.rsmod.events.EventBus
 import org.rsmod.game.entity.Player
@@ -112,6 +115,7 @@ constructor(
     private val ignoreListDelete: IgnoreListDeleteHandler,
     private val setChatFilterSettings: SetChatFilterSettingsHandler,
     private val if1Button: If1ButtonHandler,
+    private val setHeading: SetHeadingHandler,
     private val if3Button: If3ButtonHandler,
     private val closeModal: CloseModalHandler,
     private val idle: IdleHandler,
@@ -153,6 +157,7 @@ constructor(
         builder.addListener(IgnoreListDel::class.java, ignoreListDelete)
         builder.addListener(SetChatFilterSettings::class.java, setChatFilterSettings)
         builder.addListener(If1Button::class.java, if1Button)
+        builder.addListener(SetHeading::class.java, setHeading)
         builder.addListener(If3Button::class.java, if3Button)
         builder.addListener(CloseModal::class.java, closeModal)
         builder.addListener(Idle::class.java, idle)

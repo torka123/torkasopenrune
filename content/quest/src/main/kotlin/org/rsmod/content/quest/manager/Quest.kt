@@ -251,8 +251,10 @@ data class Quest(
             ifCloseSub("interface.questscroll")
         }
         access.ifSetText("component.questscroll:quest_title", "You have completed ${displayName}!")
-        val questPointLabel = if (questPoints == 1) "Quest Point" else "Quest Points"
-        access.ifSetText("component.questscroll:quest_reward1", "$questPoints $questPointLabel")
+        access.ifSetText(
+            "component.questscroll:quest_reward1",
+            "$questPoints Quest Point${if (questPoints == 1) "" else "s"}",
+        )
 
         access.ifSetObj("component.questscroll:quest_model", obj = itemDisplay.item, zoom = itemDisplay.zoom)
 

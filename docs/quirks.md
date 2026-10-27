@@ -394,5 +394,15 @@ store a preform; a successful coordinate change does.
 Sword hand-in and ore-pack conversion use all-or-nothing inventory transactions.
 Failed payment leaves the sword, commission and reward state unchanged. Coins go
 to the bank first, then inventory if necessary; Ultimate Ironmen use inventory only.
+## Account save snapshots
+
+`AccountManager.save` requests capture at the end-of-tick gameplay boundary. Persistent
+varps, serialized attributes, inventories, stats, identity and world type are detached
+before background SQL runs. `CharacterDataStage.Pipeline.capture` must return a
+`CharacterDataStage.Save` that consumes captured values, never the live player.
+
+Mutations during an in-flight autosave remain dirty for a subsequent snapshot. Retries
+consume the same snapshot before newer requests. Shutdown drains an interrupted batch
+before queued requests, retaining each request until it succeeds or reports failure.
 
 [magic-numbers]: https://en.wikipedia.org/wiki/Magic_number_(programming)

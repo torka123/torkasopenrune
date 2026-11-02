@@ -1,6 +1,6 @@
 [gamevals.varp]
-toa_personal_invocations_a = 64000
-toa_personal_invocations_b = 64001
+toa_personal_invocations_a = 63000
+toa_personal_invocations_b = 63001
 toa_personal_invocations_c = 64002
 toa_personal_kc_requirement = 64003
 toa_retrieval_locked = 64004
@@ -84,7 +84,7 @@ toa_invocation_prerequisite = 1346
 min_defence = 65560
 
 [gamevals.queue]
-toa_death = 61
+toa_death = 63000
 
 [gamevals.midi]
 toa_ambience = 730

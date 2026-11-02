@@ -159,6 +159,9 @@ daddys_home_crate_falador_tablet = 63436
 glarial_forbidden_names = 63685
 glarial_forbidden_parts = 63684
 glarial_allowed_parts = 63679
+apothecary_strength = 63688
+apothecary_energy = 63687
+apothecary_antipoison = 63686
 
 [gamevals.enum]
 daddys_home_hammers = 65460
@@ -169,8 +172,3 @@ daddys_home_house_cities = 65463
 [gamevals.clientscript]
 poh_furniture_creation_entry_old = 7988
 apothecary_potions = 65496
-
-[gamevals.dbrow]
-apothecary_strength = 63688
-apothecary_energy = 63687
-apothecary_antipoison = 63686

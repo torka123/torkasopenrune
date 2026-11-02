@@ -9,6 +9,10 @@ public interface NpcInfoProtocol {
 
     public fun setSpotanim(spotanim: Int, delay: Int, height: Int, slot: Int)
 
+    public fun setBaseAnimationSet(walkAnim: Int, readyAnim: Int)
+
+    public fun resetBaseAnimationSet()
+
     public fun setSay(text: String)
 
     public fun setFacePathingEntity(slot: Int)
@@ -38,6 +42,16 @@ public interface NpcInfoProtocol {
     public fun setHeadIcon(slot: Int, graphic: Int, index: Int)
 
     public fun setTinting(tinting: EntityTinting)
+
+    public fun setCombatLevel(level: Int)
+
+    public fun setTransparency(
+        startTime: Int,
+        endTime: Int,
+        startTransparency: Int,
+        endTransparency: Int,
+        useStartTransparency: Boolean,
+    )
 
     public fun exactMove(
         deltaX1: Int,
@@ -71,6 +85,10 @@ public data object NoopNpcInfo : NpcInfoProtocol {
 
     override fun setSpotanim(spotanim: Int, delay: Int, height: Int, slot: Int) {}
 
+    override fun setBaseAnimationSet(walkAnim: Int, readyAnim: Int) {}
+
+    override fun resetBaseAnimationSet() {}
+
     override fun setSay(text: String) {}
 
     override fun setFacePathingEntity(slot: Int) {}
@@ -98,6 +116,16 @@ public data object NoopNpcInfo : NpcInfoProtocol {
     override fun setHeadIcon(slot: Int, graphic: Int, index: Int) {}
 
     override fun setTinting(tinting: EntityTinting) {}
+
+    override fun setCombatLevel(level: Int) {}
+
+    override fun setTransparency(
+        startTime: Int,
+        endTime: Int,
+        startTransparency: Int,
+        endTransparency: Int,
+        useStartTransparency: Boolean,
+    ) {}
 
     override fun exactMove(
         deltaX1: Int,

@@ -50,7 +50,8 @@ constructor(tomlResolver: DropTableTomlResolver) {
         npc: Npc,
         areaChecker: AreaChecker?,
     ): RSDropTable<Player, DropRollItem>? {
-        val candidates = tablesByNpc[npc.type.internalName] ?: return null
+        val candidates =
+            tablesByNpc[npc.visType.internalName] ?: tablesByNpc[npc.type.internalName] ?: return null
         if (candidates.size == 1) {
             return candidates.first()
         }
@@ -66,7 +67,7 @@ constructor(tomlResolver: DropTableTomlResolver) {
                 0 -> return candidates.firstOrNull { it.areas.isEmpty() } ?: candidates.first()
                 else ->
                     error(
-                        "Multiple drop tables match npc '${npc.type.internalName}' " +
+                        "Multiple drop tables match npc '${npc.visType.internalName}' " +
                             "at ${npc.coords}: ${areaMatched.map { it.tableIdentifier }}",
                     )
             }

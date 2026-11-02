@@ -4,6 +4,7 @@ import jakarta.inject.Inject
 import jakarta.inject.Singleton
 import org.rsmod.api.combat.formulas.AccuracyFormulae
 import org.rsmod.api.combat.formulas.MaxHitFormulae
+import org.rsmod.api.npc.interact.AiPlayerInteractions
 import org.rsmod.api.player.hit.modifier.PlayerHitModifier
 import org.rsmod.api.random.GameRandom
 import org.rsmod.api.repo.loc.LocRepository
@@ -29,4 +30,23 @@ class BossDeps @Inject constructor(
     val accuracy: AccuracyFormulae,
     val maxHit: MaxHitFormulae,
     val playerHitModifier: PlayerHitModifier,
-)
+    val interactions: AiPlayerInteractions,
+) {
+    fun withExtensions(registry: BossExtensionRegistry): BossDeps =
+        BossDeps(
+            random,
+            worldRepo,
+            npcRepo,
+            locRepo,
+            playerList,
+            mapClock,
+            worldQueues,
+            collision,
+            encounterRegistry,
+            registry,
+            accuracy,
+            maxHit,
+            playerHitModifier,
+            interactions,
+        )
+}

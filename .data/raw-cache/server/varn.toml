@@ -221,76 +221,154 @@ id = "varn.slayer_engaged_clock"
 id = "varn.slayer_finishing_until"
 
 [[varn]]
-id = "varn.toa_baba_rolls"
+id = "varn.ocellus_arrived_at"
 
 [[varn]]
-id = "varn.toa_baba_rows"
+id = "varn.ocellus_volley_style"
 
 [[varn]]
-id = "varn.toa_baba_roll_exit"
+id = "varn.ocellus_corner"
 
 [[varn]]
-id = "varn.toa_baba_weak_lane"
+id = "varn.ocellus_centre_side"
 
 [[varn]]
-id = "varn.toa_baba_autos"
+id = "varn.ocellus_threshold"
 
 [[varn]]
-id = "varn.toa_baba_throw_at"
+id = "varn.ocellus_active_tendrils"
 
 [[varn]]
-id = "varn.toa_baba_rockfall_ready"
+id = "varn.ocellus_meter"
 
 [[varn]]
-id = "varn.toa_baba_last_special"
+id = "varn.ocellus_barrage_waves"
 
 [[varn]]
-id = "varn.toa_baba_under"
-
-[[varn]]
-id = "varn.toa_baba_stomp_ready"
-
-[[varn]]
-id = "varn.toa_kephri_eggs_next"
+id = "varn.ocellus_special_cycles"
 
 [[varn]]
 id = "varn.forced_max_hit_styles"
 
 [[varn]]
-id = "varn.toa_baba_baboon_next_bash"
+id = "varn.ocellus_curse"
 
 [[varn]]
-id = "varn.toa_baba_baboon_next_pick"
+id = "varn.ocellus_rift_next"
 
 [[varn]]
-id = "varn.toa_croc_wake_at"
+id = "varn.ocellus_rift_busy"
 
 [[varn]]
-id = "varn.toa_warden_orb_hits"
+id = "varn.guardian_shield_max"
 
 [[varn]]
-id = "varn.toa_zebak_wave_dz"
+id = "varn.guardian_ground_max"
 
 [[varn]]
-id = "varn.toa_zebak_wave_ticks"
+id = "varn.guardian_health"
 
 [[varn]]
-id = "varn.toa_zebak_jug_dx"
+id = "varn.guardian_landings"
 
 [[varn]]
-id = "varn.toa_zebak_jug_dz"
+id = "varn.guardian_battery_hp"
 
 [[varn]]
-id = "varn.toa_zebak_jug_left"
+id = "varn.guardian_battery_hit"
 
 [[varn]]
-id = "varn.toa_zebak_cloud_switch"
+id = "varn.guardian_enraged"
 
 [[varn]]
-id = "varn.toa_zebak_cloud_delay"
+id = "varn.dreadnoth_hp_max"
 
 [[varn]]
-id = "varn.toa_zebak_cloud_last"
+id = "varn.dreadnoth_absorbed"
 
 [[varn]]
-id = "varn.toa_zebak_cloud_target"
+id = "varn.dreadnoth_dealt"
+
+[[varn]]
+id = "varn.dreadnoth_split"
+
+[[varn]]
+id = "varn.dreadnoth_waves_done"
+
+[[varn]]
+id = "varn.dreadnoth_spawn_budget"
+
+[[varn]]
+id = "varn.dreadnoth_done"
+
+[[varn]]
+id = "varn.bork_hp_max"
+
+[[varn]]
+id = "varn.bork_smork_max"
+
+[[varn]]
+id = "varn.bork_smork_pct"
+
+[[varn]]
+id = "varn.bork_tempo"
+
+[[varn]]
+id = "varn.bork_dazed"
+
+[[varn]]
+id = "varn.bork_armour"
+
+[[varn]]
+id = "varn.bork_magic_armour"
+
+[[varn]]
+id = "varn.bork_dead"
+
+[[varn]]
+id = "varn.bork_removed"
+
+[[varn]]
+id = "varn.bork_smork_dead"
+
+[[varn]]
+id = "varn.bork_smork_removed"
+
+[[varn]]
+id = "varn.bork_stomp_side"
+
+[[varn]]
+id = "varn.bork_done"
+
+[[varn]]
+id = "varn.xarth_hp_max"
+
+[[varn]]
+id = "varn.xarth_wave"
+
+[[varn]]
+id = "varn.xarth_first_heap"
+
+[[varn]]
+id = "varn.xarth_heaps"
+
+[[varn]]
+id = "varn.xarth_slot"
+
+[[varn]]
+id = "varn.xarth_magics"
+
+[[varn]]
+id = "varn.xarth_healed"
+
+[[varn]]
+id = "varn.xarth_heal_pending"
+
+[[varn]]
+id = "varn.xarth_last_hit"
+
+[[varn]]
+id = "varn.xarth_dead"
+
+[[varn]]
+id = "varn.xarth_done"

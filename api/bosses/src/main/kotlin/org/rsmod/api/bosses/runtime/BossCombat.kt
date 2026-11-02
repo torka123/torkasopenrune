@@ -17,6 +17,7 @@ import org.rsmod.api.script.onModifyNpcHit
 import org.rsmod.api.script.onNpcHit
 import org.rsmod.game.entity.Npc
 import org.rsmod.game.entity.Player
+import org.rsmod.game.entity.npc.NpcApproach
 import org.rsmod.game.entity.npc.NpcStateEvents
 import org.rsmod.plugin.scripts.ScriptContext
 
@@ -137,6 +138,9 @@ object BossCombat {
         deps.encounterRegistry.remove(npc)?.let(deps::disposeOwned)
         PlayerBleed.clearOwnedBy(npc, deps.playerList)
         npc.movementLocked = false
+        npc.scriptedMovement = false
+        npc.approach = NpcApproach.StopInRange
+        npc.interactsWhenUnderTarget = false
         npc.apRangeOverride = null
         npc.apRequiresLineOfSight = true
         npc.moveRestrict = npc.type.moveRestrict
@@ -172,6 +176,7 @@ object BossCombat {
         val priority = encounter.selectPriorityAbility(tick, target)
         if (priority != null) {
             val effect = spec.abilities[priority] ?: return
+            bossLogger.debug { "${npc.bossTag} attack (priority): $priority" }
             encounter.startAttack(priority, tick)
             EffectInterpreter(npc, target, spec, encounter, deps).run(this, effect)
             return
@@ -181,6 +186,7 @@ object BossCombat {
         val abilityName = encounter.selectAbility(phase.selector, tick, target) ?: return
         val effect = spec.abilities[abilityName] ?: return
 
+        bossLogger.debug { "${npc.bossTag} attack: $abilityName" }
         encounter.startAttack(abilityName, tick)
 
         val interpreter = EffectInterpreter(npc, target, spec, encounter, deps)
@@ -198,6 +204,7 @@ object BossCombat {
         for ((index, trigger) in spec.triggers.withIndex()) {
             if (index in encounter.firedTriggers) continue
             if (encounter.evaluate(trigger.condition, target)) {
+                bossLogger.debug { "${encounter.npc.bossTag} trigger #$index fired: ${trigger.condition}" }
                 encounter.firedTriggers += index
                 val interpreter = EffectInterpreter(encounter.npc, target, spec, encounter, deps)
                 interpreter.run(access, trigger.effect)
@@ -247,6 +254,7 @@ object BossCombat {
         deps: BossDeps,
     ) {
         val effect = spec.abilities[abilityName] ?: return
+        bossLogger.debug { "${access.npc.bossTag} phase entry: $abilityName" }
         EffectInterpreter(access.npc, target, spec, encounter, deps).run(access, effect)
     }
 }

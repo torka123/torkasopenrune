@@ -77,6 +77,16 @@ fun BossDeps.runAbility(npc: Npc, target: Player, ability: String) {
     EffectInterpreter(npc, target, encounter.spec, encounter, this).run(null, effect)
 }
 
+/** Runs [owner]'s [ability] as [caster], another npc the encounter owns, e.g. for Kotlin-driven events. */
+fun BossDeps.runAbilityAs(owner: Npc, caster: Npc, target: Player, ability: String) {
+    val encounter = encounterRegistry.of(owner)
+    val effect =
+        requireNotNull(encounter.spec.abilities[ability]) {
+            "Ability '$ability' does not exist in boss spec."
+        }
+    EffectInterpreter(caster, target, encounter.spec, encounter, this).run(null, effect)
+}
+
 fun BossDeps.interrupt(npc: Npc) {
     encounterRegistry.of(npc).interrupt(mapClock.cycle)
 }
@@ -138,6 +148,8 @@ class OwnedLoc
 internal constructor(
     val info: LocInfo,
     val blockPlayersOnly: Boolean,
+    val loc: String,
+    val angle: Int,
     internal val placedAt: Int,
     internal val onStand: ((Player) -> Unit)?,
 )
@@ -150,14 +162,34 @@ fun BossDeps.spawnOwnedLoc(
     blockPlayersOnly: Boolean,
     onStand: ((Player) -> Unit)? = null,
 ) {
-    val encounter = encounterRegistry.of(npc)
+    spawnOwnedLoc(encounterRegistry.of(npc), tile, loc, angle, blockPlayersOnly, onStand)
+}
+
+internal fun BossDeps.spawnOwnedLoc(
+    encounter: BossEncounter,
+    tile: CoordGrid,
+    loc: String,
+    angle: Int,
+    blockPlayersOnly: Boolean,
+    onStand: ((Player) -> Unit)? = null,
+) {
     if (encounter.ownsLocAt(tile)) return
     val info = locRepo.add(tile, loc, Int.MAX_VALUE, LocAngle[angle], LocShape.CentrepieceStraight)
     if (blockPlayersOnly) {
         collision.remove(tile, CollisionFlag.LOC or CollisionFlag.LOC_ROUTE_BLOCKER)
         collision.add(tile, CollisionFlag.BLOCK_PLAYERS)
     }
-    encounter.addOwnedLoc(tile, OwnedLoc(info, blockPlayersOnly, mapClock.cycle, onStand))
+    encounter.addOwnedLoc(
+        tile,
+        OwnedLoc(
+            info = info,
+            blockPlayersOnly = blockPlayersOnly,
+            loc = loc,
+            angle = angle,
+            placedAt = mapClock.cycle,
+            onStand = onStand,
+        ),
+    )
     if (onStand != null && !encounter.standTickRunning) {
         encounter.standTickRunning = true
         worldQueues.add(1) { standTick(encounter) }
@@ -180,9 +212,25 @@ private fun BossDeps.standTick(encounter: BossEncounter) {
     worldQueues.add(1) { standTick(encounter) }
 }
 
+internal fun BossDeps.replaceOwnedLoc(encounter: BossEncounter, tile: CoordGrid, loc: String) {
+    val old = encounter.removeOwnedLoc(tile, keepTags = true) ?: return
+    removeLocs(mapOf(tile to old))
+    spawnOwnedLoc(encounter, tile, loc, old.angle, old.blockPlayersOnly)
+}
+
 fun BossDeps.removeOwnedLoc(npc: Npc, tile: CoordGrid) {
     val loc = encounterRegistry.of(npc).releaseOwnedLocAt(tile) ?: return
     removeLocs(mapOf(tile to loc))
+}
+
+internal fun BossDeps.removeOwnedLoc(encounter: BossEncounter, tile: CoordGrid) {
+    val old = encounter.removeOwnedLoc(tile) ?: return
+    removeLocs(mapOf(tile to old))
+}
+
+/** Makes an npc spawned outside the spec (e.g. by Kotlin content) owned by [owner]'s encounter. */
+fun BossDeps.adoptOwnedNpc(owner: Npc, npc: Npc) {
+    encounterRegistry.of(owner).addOwnedNpc(npc)
 }
 
 fun BossDeps.removeLocs(locs: Map<CoordGrid, OwnedLoc>, breakSpotanim: String? = null) {

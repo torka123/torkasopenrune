@@ -19,9 +19,9 @@ beaver_chance = 65406
 [gamevals.varp]
 pet_follower_state = 65473
 pet_emote_cooldown = 65474
-pet_morph_unlocks = 65478
-cat_growth = 65477
-cat_care = 65476
+pet_morph_unlocks = 65466
+cat_growth = 65465
+cat_care = 65464
 dog_growth = 65475
 
 [gamevals.varbit]
